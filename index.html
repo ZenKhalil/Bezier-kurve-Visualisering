@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bezier-Kurve Visualisering</title>
+    <title>Bezier-Spline Visualisering</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- CDN for MathJax -->
+    <!-- Inkluder MathJax for formel-rendering -->
     <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <h1>Bezier-Kurve Visualisering</h1>
+    <h1>Bezier-Spline Visualisering</h1>
 
     <div id="controls">
         <label for="curveType">Vælg Bezier-Kurve Type:</label>
@@ -18,16 +18,24 @@
             <option value="quadratic">Kvadratisk</option>
             <option value="cubic" selected>Kubisk</option>
         </select>
+        <button id="addCurveButton">Tilføj Kurve</button>
         <button id="saveButton">Gem som Billede</button>
+        <button id="zoomInButton">Zoom Ind</button>
+        <button id="zoomOutButton">Zoom Ud</button>
     </div>
 
-    <canvas id="bezierCanvas" width="800" height="600"></canvas>
+    <div id="canvasWrapper">
+        <canvas id="bezierCanvas" width="800" height="600"></canvas>
+    </div>
 
     <div id="formula">
         <h2>Matematisk Formel:</h2>
         <div id="formulaContent">\(\)</div>
     </div>
+
+    <!-- Indlæs main.js først -->
     <script src="main.js"></script>
+    <!-- Indlæs events.js efter main.js -->
     <script src="events.js"></script>
 </body>
 </html>
