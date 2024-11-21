@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bezier-kurve Visualisering</title>
+    <title>Bezier-Kurve Visualisering</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- CDN for MathJax -->
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <h1>Bezier-kurve Visualisering</h1>
-    <canvas id="bezierCanvas" width="800" height="600"></canvas>
+    <h1>Bezier-Kurve Visualisering</h1>
+
     <div id="controls">
-        <button id="resetButton">Reset</button>
+        <label for="curveType">Vælg Bezier-Kurve Type:</label>
+        <select id="curveType">
+            <option value="linear">Lineær</option>
+            <option value="quadratic">Kvadratisk</option>
+            <option value="cubic" selected>Kubisk</option>
+        </select>
+        <button id="saveButton">Gem som Billede</button>
     </div>
 
-    <script src="app.js"></script>
+    <canvas id="bezierCanvas" width="800" height="600"></canvas>
+
+    <div id="formula">
+        <h2>Matematisk Formel:</h2>
+        <div id="formulaContent">\(\)</div>
+    </div>
+    <script src="main.js"></script>
+    <script src="events.js"></script>
 </body>
 </html>
