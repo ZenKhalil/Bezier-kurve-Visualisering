@@ -1,3 +1,5 @@
+/* styles.css */
+
 body {
     display: flex;
     flex-direction: column;
@@ -26,36 +28,48 @@ h1 {
     font-size: 16px;
 }
 
-#saveButton {
+#addCurveButton, #saveButton, #zoomInButton, #zoomOutButton {
     padding: 5px 10px;
     margin-left: 10px;
     font-size: 16px;
     cursor: pointer;
 }
 
-#bezierCanvas {
+#canvasWrapper {
+    width: 800px;
+    max-width: 90vw; /* Responsiv bredde */
+    height: 600px;
+    max-height: 80vh; /* Responsiv højde */
     border: 1px solid #ccc;
     background-color: #fff;
-    cursor: crosshair;
+    overflow: auto; /* Gør wrapper scrollable */
+    position: relative;
+    margin-bottom: 20px;
 }
 
+#bezierCanvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    display: block;
+}
+
+#formula {
+    width: 800px;
+    max-width: 90vw; /* Gør den responsiv */
+    background-color: #fff;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
 #formula h2 {
     margin-top: 0;
 }
 
-#formula {
-    margin-top: 20px;
-    width: 100%; 
-    max-width: 1000px; 
-    background-color: #fff;
-    padding: 10px 20px;
-    border: 5px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; 
-}
-
 #formulaContent {
     font-size: 18px;
-    white-space: nowrap; /* Forhindrer linjeskift i formlen */
+    word-wrap: break-word; /* Sørger for at formlen brydes korrekt */
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
