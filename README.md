@@ -100,3 +100,12 @@ Følg disse trin for at køre projektet lokalt:
    - LaTeX-formler for de aktuelle kurver vises automatisk under canvas. Sørg for, at MathJax er korrekt indlæst for at se formlerne.
 
 
+## Inspirationskilder
+
+- **Bézier curves (Coding Challenge 163)**: [https://www.youtube.com/watch?v=enNfb6p3j_g](https://www.youtube.com/watch?v=enNfb6p3j_g)
+- **Bezier Curves Explained**: [https://www.youtube.com/watch?v=pnYccz1Ha34](https://www.youtube.com/watch?v=pnYccz1Ha34)
+- **The Beauty of Bézier Curves**: [https://www.youtube.com/watch?v=aVwxzDHniEw](https://www.youtube.com/watch?v=aVwxzDHniEw)
+- [Wikipedia: Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve)
+- [Bezier Spline Continuity](https://www.csc.kth.se/~weinkauf/notes/beziersplinecontinuity.html)
+- [Splines from Scratch: Bezier Curves](https://dev.to/ndesmic/splines-from-scratch-bezier-curves-1c1m)
+- [JavaScript.info: Bezier curve](https://javascript.info/bezier-curve)
