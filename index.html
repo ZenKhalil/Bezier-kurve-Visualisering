@@ -12,17 +12,18 @@
     <h1>Bezier-Spline Visualisering</h1>
 
     <div id="controls">
-        <label for="curveType">Vælg Bezier-Kurve Type:</label>
-        <select id="curveType">
-            <option value="linear">Lineær</option>
-            <option value="quadratic">Kvadratisk</option>
-            <option value="cubic" selected>Kubisk</option>
-        </select>
-        <button id="addCurveButton">Tilføj Kurve</button>
-        <button id="saveButton">Gem som Billede</button>
-        <button id="zoomInButton">Zoom Ind</button>
-        <button id="zoomOutButton">Zoom Ud</button>
-    </div>
+    <label for="curveType">Vælg Bezier-Kurve Type:</label>
+    <select id="curveType">
+        <option value="linear" selected>Lineær</option>
+        <option value="quadratic">Kvadratisk</option>
+        <option value="cubic">Kubisk</option>
+        <option value="bezier-spline">Bezier Spline</option>
+    </select>
+    <button id="addCurveButton">Tilføj Kurve</button>
+    <button id="saveButton">Gem som Billede</button>
+    <button id="zoomInButton">Zoom Ind</button>
+    <button id="zoomOutButton">Zoom Ud</button>
+</div>
 
     <div id="canvasWrapper">
         <canvas id="bezierCanvas" width="800" height="600"></canvas>
@@ -33,9 +34,8 @@
         <div id="formulaContent">\(\)</div>
     </div>
 
-    <!-- Indlæs main.js først -->
+    <!-- Inkluder dine scripts som moduler -->
     <script src="main.js"></script>
-    <!-- Indlæs events.js efter main.js -->
     <script src="events.js"></script>
 </body>
 </html>
