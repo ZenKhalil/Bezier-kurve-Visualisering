@@ -58,7 +58,6 @@ class BezierCurve {
       y: formatNumber(p.y / gridSpacing),
     }));
 
-    // Debugging: Sørg for, at punkterne er korrekt formaterede
     console.log(points);
 
     let formula = "";
