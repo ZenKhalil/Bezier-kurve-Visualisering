@@ -2,6 +2,8 @@
 
 ![Bezier-kurve-Visualisering Screenshot](image.png)
 
+Link til Demo ![Her](https://zenkhalil.github.io/Bezier-kurve-Visualisering/)
+
 ## Introduktion
 
 **Bezier-kurve-Visualisering** er et interaktivt webbaseret værktøj designet til at hjælpe brugere med at tegne, visualisere og manipulere Bezier-kurver og splines på en HTML5 `<canvas>`. 
