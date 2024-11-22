@@ -109,8 +109,8 @@ canvas.addEventListener("mousemove", (e) => {
             }
           : { x: 1, y: 0 }; // Standardretning hvis længden er 0
 
-      // Bestem skala for tangentens længde (juster efter behov)
-      const tangentScale = 1; // Ændr denne værdi for at justere tangentens længde
+      // Bestem skala for tangentens længde
+      const tangentScale = 1; 
 
       // Beregn den nye tangent
       const newTangent = {
@@ -176,9 +176,9 @@ curveTypeSelect.addEventListener("change", (e) => {
   currentCurveType = e.target.value;
   
   if (currentCurveType === "bezier-spline") {
-    addCurveButton.disabled = true; // Deaktivér knappen
+    addCurveButton.disabled = true; 
   } else {
-    addCurveButton.disabled = false; // Aktivér knappen
+    addCurveButton.disabled = false; 
   }
 
   initializeControlPoints();
