@@ -1,8 +1,12 @@
 # Bezier-kurve-Visualisering
 
+**Dette projekt er lavet af mig, Mohammed-Zen Alkhzrachi.**
+
 ![Bezier-kurve-Visualisering Screenshot](image.png)
 
 [Link til Demo](https://zenkhalil.github.io/Bezier-kurve-Visualisering/)
+
+[Link til Repository](https://github.com/ZenKhalil/Bezier-kurve-Visualisering/)
 
 ## Introduktion
 
