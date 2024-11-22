@@ -55,12 +55,14 @@ h1 {
 }
 
 #formula {
-    width: 800px;
-    max-width: 90vw; /* Gør den responsiv */
+    margin-top: 20px;
+    width: 100%; 
+    max-width: 1000px; 
     background-color: #fff;
     padding: 10px 20px;
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box; 
 }
 
 #formula h2 {
