@@ -9,15 +9,15 @@
     <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <h1>Bezier-Spline Visualisering</h1>
+    <h1>Bézierkurve Visualisering</h1>
 
     <div id="controls">
-    <label for="curveType">Vælg Bezier-Kurve Type:</label>
+    <label for="curveType">Vælg Bézierkurve Type:</label>
     <select id="curveType">
-        <option value="linear" selected>Lineær</option>
+        <option value="linear">Lineær</option>
         <option value="quadratic">Kvadratisk</option>
         <option value="cubic">Kubisk</option>
-        <option value="bezier-spline">Bezier Spline</option>
+        <option value="bezier-spline">Bézier Spline</option>
     </select>
     <button id="addCurveButton">Tilføj Kurve</button>
     <button id="saveButton">Gem som Billede</button>
@@ -35,6 +35,8 @@
     </div>
 
     <!-- Inkluder dine scripts som moduler -->
+    <script src="bezierClasses.js"></script>
+    <script src="drawing.js"></script>
     <script src="main.js"></script>
     <script src="events.js"></script>
 </body>

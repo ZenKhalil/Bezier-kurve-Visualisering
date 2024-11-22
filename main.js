@@ -1,3 +1,5 @@
+// main.js
+
 const canvas = document.getElementById("bezierCanvas");
 const bezierCanvasElement = document.getElementById("bezierCanvas");
 
@@ -9,130 +11,7 @@ const snappingThreshold = 10;
 let scale = 1;
 const scaleFactor = 1.1;
 
-// BezierCurve Klasse
-class BezierCurve {
-  constructor(controlPoints, type = "cubic") {
-    this.controlPoints = controlPoints; // Array of points {x, y, label}
-    this.type = type; // 'linear', 'quadratic', 'cubic'
-  }
-
-  draw(ctx) {
-    if (this.controlPoints.length < 2) return;
-
-    ctx.strokeStyle = "blue";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(this.controlPoints[0].x, this.controlPoints[0].y);
-
-    switch (this.type) {
-      case "linear":
-        ctx.lineTo(this.controlPoints[1].x, this.controlPoints[1].y);
-        break;
-      case "quadratic":
-        if (this.controlPoints.length < 3) return;
-        ctx.quadraticCurveTo(
-          this.controlPoints[1].x,
-          this.controlPoints[1].y,
-          this.controlPoints[2].x,
-          this.controlPoints[2].y
-        );
-        break;
-      case "cubic":
-      default:
-        if (this.controlPoints.length < 4) return;
-        ctx.bezierCurveTo(
-          this.controlPoints[1].x,
-          this.controlPoints[1].y,
-          this.controlPoints[2].x,
-          this.controlPoints[2].y,
-          this.controlPoints[3].x,
-          this.controlPoints[3].y
-        );
-        break;
-    }
-
-    ctx.stroke();
-  }
-
-  // Funktion til at formatere et punkt som (x, y)
-  formatPoint(p) {
-    return `(${p.x}, ${p.y})`;
-  }
-
-  generateFormula() {
-    const points = this.controlPoints.map((p) => ({
-      x: formatNumber(p.x / gridSpacing),
-      y: formatNumber(p.y / gridSpacing),
-    }));
-
-    // Debugging: Sørg for, at punkterne er korrekt formaterede
-    console.log(points);
-
-    let formula = "";
-    switch (this.type) {
-      case "linear":
-        formula = `\\[ \\mathbf{B}(t) = (1-t)${this.formatPoint(
-          points[0]
-        )} + t${this.formatPoint(points[1])}, \\quad 0 \\leq t \\leq 1 \\]`;
-        break;
-      case "quadratic":
-        formula = `\\[ \\mathbf{B}(t) = (1-t)^2${this.formatPoint(
-          points[0]
-        )} + 2(1-t)t${this.formatPoint(points[1])} + t^2${this.formatPoint(
-          points[2]
-        )}, \\quad 0 \\leq t \\leq 1 \\]`;
-        break;
-      case "cubic":
-      default:
-        formula = `\\[ \\mathbf{B}(t) = (1-t)^3${this.formatPoint(
-          points[0]
-        )} + 3(1-t)^2t${this.formatPoint(
-          points[1]
-        )} + 3(1-t)t^2${this.formatPoint(points[2])} + t^3${this.formatPoint(
-          points[3]
-        )}, \\quad 0 \\leq t \\leq 1 \\]`;
-        break;
-    }
-
-    return formula;
-  }
-}
-
-// BezierSpline Klasse
-class BezierSpline {
-  constructor() {
-    this.curves = []; // Array of BezierCurve instances
-  }
-
-  addCurve(bezierCurve) {
-    this.curves.push(bezierCurve);
-  }
-
-  draw(ctx) {
-    this.curves.forEach((curve) => curve.draw(ctx));
-  }
-
-  generateFormulas() {
-    let formulas = [];
-    if (
-      this.curves.length === 4 &&
-      this.curves.every((curve) => curve.type === "cubic")
-    ) {
-      // Antag at det er en Bezier Spline hvis der er fire kubiske kurver
-      formulas.push("<b>Bezier Spline:</b>");
-      this.curves.forEach((curve, index) => {
-        formulas.push(`Kurve ${index + 1}: ${curve.generateFormula()}`);
-      });
-    } else {
-      // For andre tilfælde, vis enkeltkurver
-      this.curves.forEach((curve, index) => {
-        formulas.push(`Kurve ${index + 1}: ${curve.generateFormula()}`);
-      });
-    }
-    return formulas.join("<br>");
-  }
-}
-
+// Referencer til DOM-elementer
 const bezierCanvas = document.getElementById("bezierCanvas");
 const ctx = bezierCanvas.getContext("2d");
 const curveTypeSelect = document.getElementById("curveType");
@@ -150,10 +29,6 @@ let bezierSpline = new BezierSpline();
 
 // Initial kurvetype
 let currentCurveType = curveTypeSelect.value;
-
-// Hjælpefunktion til at formatere tal
-const formatNumber = (num) =>
-  Number.isInteger(num) ? `${num}` : `${num.toFixed(1)}`;
 
 // Initialiser kontrolpunkter baseret på kurvetype
 const initializeControlPoints = () => {
@@ -238,109 +113,6 @@ const initializeControlPoints = () => {
 const snapToGrid = (value) => {
   const snapped = Math.round(value / gridSpacing) * gridSpacing;
   return Math.abs(value - snapped) < snappingThreshold ? snapped : value;
-};
-
-// Tegn gridlinjer
-const drawGrid = () => {
-  ctx.strokeStyle = "#e0e0e0";
-  ctx.lineWidth = 1;
-
-  // Beregn synligt område i verdenskoordinater
-  const left = -canvas.width / 2 / scale;
-  const right = canvas.width / 2 / scale;
-  const bottom = -canvas.height / 2 / scale;
-  const top = canvas.height / 2 / scale;
-
-  // Beregn startpunkter for gridlinjer
-  const startX = Math.floor(left / gridSpacing) * gridSpacing;
-  const endX = Math.ceil(right / gridSpacing) * gridSpacing;
-  const startY = Math.floor(bottom / gridSpacing) * gridSpacing;
-  const endY = Math.ceil(top / gridSpacing) * gridSpacing;
-
-  // Tegn vertikale gridlinjer
-  for (let x = startX; x <= endX; x += gridSpacing) {
-    ctx.beginPath();
-    ctx.moveTo(x, bottom);
-    ctx.lineTo(x, top);
-    ctx.stroke();
-  }
-
-  // Tegn horisontale gridlinjer
-  for (let y = startY; y <= endY; y += gridSpacing) {
-    ctx.beginPath();
-    ctx.moveTo(left, y);
-    ctx.lineTo(right, y);
-    ctx.stroke();
-  }
-};
-
-// Tegn akser med labels
-const drawAxes = () => {
-  ctx.strokeStyle = "#000000";
-  ctx.lineWidth = 2;
-  // X og Y akser
-  ["X", "Y"].forEach((axis) => {
-    ctx.beginPath();
-    ctx.moveTo(
-      axis === "X" ? -canvas.width / 2 / scale : 0,
-      axis === "Y" ? -canvas.height / 2 / scale : 0
-    );
-    ctx.lineTo(
-      axis === "X" ? canvas.width / 2 / scale : 0,
-      axis === "Y" ? canvas.height / 2 / scale : 0
-    );
-    ctx.stroke();
-  });
-
-  // Labels
-  ctx.save();
-  ctx.scale(1, -1);
-  ctx.fillStyle = "#000000";
-  ctx.font = "12px Arial";
-  for (let i = 1; i < canvas.width / gridSpacing; i++) {
-    ctx.fillText(formatNumber(i), i * gridSpacing, 15);
-    ctx.fillText(formatNumber(-i), -i * gridSpacing, 15);
-  }
-  for (let j = 1; j < canvas.height / gridSpacing; j++) {
-    ctx.fillText(formatNumber(j), 5, -j * gridSpacing + 3);
-    ctx.fillText(formatNumber(-j), 5, j * gridSpacing + 3);
-  }
-  ctx.restore();
-};
-
-// Tegn kontrolpunkter og labels
-const drawControlPoints = () => {
-  bezierSpline.curves.forEach((curve, curveIndex) => {
-    curve.controlPoints.forEach(({ x, y, label }) => {
-      ctx.fillStyle = "red";
-      ctx.beginPath();
-      ctx.arc(x, y, 5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "black";
-      ctx.save();
-      ctx.scale(1, -1);
-      ctx.fillText(label, x + 7, -y + 5);
-      ctx.restore();
-    });
-  });
-};
-
-// Tegn linjer mellem kontrolpunkter
-const drawControlLines = () => {
-  bezierSpline.curves.forEach((curve, curveIndex) => {
-    if (curve.controlPoints.length < 2) return;
-    ctx.strokeStyle = "gray";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(curve.controlPoints[0].x, curve.controlPoints[0].y);
-    curve.controlPoints.slice(1).forEach((p) => ctx.lineTo(p.x, p.y));
-    ctx.stroke();
-  });
-};
-
-// Tegn Bezier-spline
-const drawSpline = () => {
-  bezierSpline.draw(ctx);
 };
 
 // Generer LaTeX-formler for alle kurver
