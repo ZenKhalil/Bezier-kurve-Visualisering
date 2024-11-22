@@ -2,7 +2,7 @@
 
 ![Bezier-kurve-Visualisering Screenshot](image.png)
 
-Link til Demo ![Her](https://zenkhalil.github.io/Bezier-kurve-Visualisering/)
+Link til Demo ![https://zenkhalil.github.io/Bezier-kurve-Visualisering/]
 
 ## Introduktion
 
