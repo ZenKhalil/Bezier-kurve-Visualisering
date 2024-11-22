@@ -1,5 +1,3 @@
-// main.js
-
 const canvas = document.getElementById("bezierCanvas");
 const bezierCanvasElement = document.getElementById("bezierCanvas");
 
@@ -49,7 +47,6 @@ const initializeControlPoints = () => {
       { x: 3, y: -2, label: "P3" },
     ],
     "bezier-spline": [
-      // Ny Case for Bezier Spline
       // Kurve 1
       [
         { x: -1, y: 2, label: "P0" },
@@ -81,7 +78,7 @@ const initializeControlPoints = () => {
     ],
   };
 
-  // Clear existing curves
+  // Ryd eksisterende kurver
   bezierSpline.curves = [];
 
   if (currentCurveType === "bezier-spline") {
@@ -191,8 +188,8 @@ const addCurve = () => {
     y: prevTangent.y / tangentLength,
   };
 
-  // Bestem skala for tangentens længde (juster efter behov)
-  const tangentScale = 1; // Ændr denne værdi for at justere tangentens længde
+  // Bestem skala for tangentens længde 
+  const tangentScale = 1; 
 
   // Beregn den nye tangent
   const newTangent = {
@@ -229,7 +226,7 @@ const addCurve = () => {
         y: lastPoint.y + newTangent.y,
       };
 
-      // Definer et slutpunkt (kan tilpasses efter behov)
+      // Definer et slutpunkt 
       const endPointQuadratic = {
         x: lastPoint.x + 3 * gridSpacing,
         y: lastPoint.y + 3 * gridSpacing,
@@ -275,7 +272,7 @@ const addCurve = () => {
         {
           x: lastPoint.x,
           y: lastPoint.y,
-          label: lastPoint.label, // Bevar den samme etiket
+          label: lastPoint.label, 
         },
         {
           x: newP1.x,
